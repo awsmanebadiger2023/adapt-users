@@ -1,0 +1,69 @@
+spring:
+  application:
+    name: adapt-users
+  profiles:
+    active: 
+    - dev
+info:
+  application:
+    name: ${spring.application.name}
+    description: Very cool Spring Boot application
+    version: '@project.version@'
+    spring-cloud-version: '@spring-cloud.version@'
+    spring-boot-version: '@project.parent.version@'
+springdoc:
+  version: '@springdoc.version@'
+  swagger-ui:
+    path: /swagger-ui-custom.html
+    display-request-duration: true
+    groups-order: DESC
+    operationsSorter: method
+    disable-swagger-default-url: true
+    use-root-path: true
+  
+
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    env:
+      show-values: ALWAYS
+    health:
+      show-details: ALWAYS    
+server:
+  port : 5050
+  servlet:
+    context-path: /adapt-users
+
+---
+spring:
+  config:
+    activate:
+      on-profile:
+      - dev 
+server:
+  email: mane.badiger.dev@gmail.com
+
+---
+spring:
+  config:
+    activate:
+      on-profile:
+      - uat 
+server:
+  email: mane.badiger.uat@gmail.com
+
+---
+spring:
+  config:
+    activate:
+      on-profile:
+      - prod 
+server:
+  email: mane.badiger.prod@gmail.com
+  
